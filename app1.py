@@ -57,9 +57,10 @@ prompt = ChatPromptTemplate.from_template(template)
 
 user_input = st.text_input("Ask any question....")
 if user_input and hf_api_key and uploaded_file:
-    llm = HuggingFaceEndpoint(repo_id="mistralai/Mistral-7B-Instruct-v0.3", 
+    llm = HuggingFaceEndpoint(repo_id="HuggingFaceH4/zephyr-7b-beta", 
         max_new_tokens=300,temperature=0.7,
-        huggingfacehub_api_token=hf_api_key
+        huggingfacehub_api_token=hf_api_key,
+        task="text-generation"
         )
     document_chain = create_stuff_documents_chain(llm, prompt)
     retriever = st.session_state.vectors.as_retriever()
